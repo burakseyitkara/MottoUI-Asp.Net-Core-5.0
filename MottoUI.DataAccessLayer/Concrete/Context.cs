@@ -14,7 +14,7 @@ namespace MottoUI.DataAccessLayer.Concrete
         {
             optionsBuilder.UseSqlServer("server=BURAK;database=CoreBlogDb; integrated security=true");
         }
-
+        //Context DbSet Properties
         public DbSet<About> Abouts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Category> Categories { get; set; }
