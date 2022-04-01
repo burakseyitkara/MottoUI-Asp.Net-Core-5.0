@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MottoUI.BusinessLayer\MottoUI.BusinessLayer.csproj" />
+    <ProjectReference Include="..\MottoUI.DataAccessLayer\MottoUI.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\MottoUI.EntityLayer\MottoUI.EntityLayer.csproj" />
+  </ItemGroup>
+
+</Project>
