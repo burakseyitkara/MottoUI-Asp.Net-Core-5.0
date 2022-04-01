@@ -9,4 +9,8 @@
     <ProjectReference Include="..\MottoUI.EntityLayer\MottoUI.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ValidationRules\" />
+  </ItemGroup>
+
 </Project>

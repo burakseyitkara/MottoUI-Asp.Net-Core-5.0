@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 
 namespace MottoUI.DataAccessLayer.Abstract
 {
-    public interface IBlogDal
+    public interface IBlogDal:IGenericDal<Blog>
     {
-        List<Blog> ListAllBlog();
-        Blog GetById(int id);
-        void AddBlog(Blog blog);
-        void UpdateBlog(Blog blog);
-        void DeleteBlog(Blog blog);
+        
 
     }
 }
