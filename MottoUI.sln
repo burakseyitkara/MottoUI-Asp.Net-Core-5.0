@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottoUI", "MottoUI\MottoUI.csproj", "{8E51BEB8-F2A8-427F-9CAD-2693ED1F7C65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MottoUI", "MottoUI\MottoUI.csproj", "{8E51BEB8-F2A8-427F-9CAD-2693ED1F7C65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottoUI.BusinessLayer", "MottoUI.BusinessLayer\MottoUI.BusinessLayer.csproj", "{CE0DC4DF-20EF-4783-9806-1F89BFAC44F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MottoUI.BusinessLayer", "MottoUI.BusinessLayer\MottoUI.BusinessLayer.csproj", "{CE0DC4DF-20EF-4783-9806-1F89BFAC44F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottoUI.CoreLayer", "MottoUI.CoreLayer\MottoUI.CoreLayer.csproj", "{8364E4FD-132A-4140-8296-717971450B8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MottoUI.CoreLayer", "MottoUI.CoreLayer\MottoUI.CoreLayer.csproj", "{8364E4FD-132A-4140-8296-717971450B8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottoUI.DataAccessLayer", "MottoUI.DataAccessLayer\MottoUI.DataAccessLayer.csproj", "{BF167694-796D-4036-93F0-21AF4593F5D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MottoUI.DataAccessLayer", "MottoUI.DataAccessLayer\MottoUI.DataAccessLayer.csproj", "{BF167694-796D-4036-93F0-21AF4593F5D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottoUI.EntityLayer", "MottoUI.EntityLayer\MottoUI.EntityLayer.csproj", "{9BD3A3D3-2C87-42E8-BDB5-B9567937C6B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MottoUI.EntityLayer", "MottoUI.EntityLayer\MottoUI.EntityLayer.csproj", "{9BD3A3D3-2C87-42E8-BDB5-B9567937C6B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,12 +15,17 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MottoUI.BusinessLayer\MottoUI.BusinessLayer.csproj" />
     <ProjectReference Include="..\MottoUI.DataAccessLayer\MottoUI.DataAccessLayer.csproj" />
     <ProjectReference Include="..\MottoUI.EntityLayer\MottoUI.EntityLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\CoreBlogTema\" />
   </ItemGroup>
 
 </Project>
