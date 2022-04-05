@@ -31,7 +31,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="exampleInputPassword1 mb-2">Şifre</label>
-                            @Html.TextBoxFor(x=> x.WriterPassword,new { @class = "form-control",@placeholder = "Şifreniz"})
+                            @Html.TextBoxFor(x=> x.WriterPassword,new { @class = "form-control",@placeholder = "Şifreniz",type="password"})
                             @Html.ValidationMessageFor(x=> x.WriterPassword,"",new { @class = "text-danger" })
                             @*<input type="password" class="form-control" id="password1" name="WriterPassword" placeholder="" required="">*@
                         </div>
