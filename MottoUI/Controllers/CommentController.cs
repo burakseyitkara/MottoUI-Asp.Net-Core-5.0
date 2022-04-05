@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MottoUI.BusinessLayer.Concrete;
+using MottoUI.DataAccessLayer.EntityFramework;
 
 namespace MottoUI.Controllers
 {
     public class CommentController : Controller
     {
+    CommentManager cm = new CommentManager(new EfCommentRepository());
         public IActionResult Index()
         {
             return View();
@@ -14,9 +17,10 @@ namespace MottoUI.Controllers
         {
             return PartialView();
         }
-        public PartialViewResult CommentListByBlog()
+        public PartialViewResult CommentListByBlog(int id)
         {
-            return PartialView();
+            var values = cm.GetList(id);
+            return PartialView(values);
         }
-    }
+    } 
 }
