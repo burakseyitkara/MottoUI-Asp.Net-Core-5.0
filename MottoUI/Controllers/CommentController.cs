@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MottoUI.BusinessLayer.Concrete;
 using MottoUI.DataAccessLayer.EntityFramework;
+using MottoUI.EntityLayer.Concrete;
+using System;
 
 namespace MottoUI.Controllers
 {
@@ -12,11 +14,21 @@ namespace MottoUI.Controllers
             return View();
         }
 
-
+        [HttpGet]
         public PartialViewResult PartialAddComment()
         {
             return PartialView();
         }
+        [HttpPost]
+        public PartialViewResult PartialAddComment(Comment p)
+        {
+            p.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            p.CommentStatus = true;
+            p.BlogID = 4;
+            cm.CommentAdd(p);
+            return PartialView();
+        }
+
         public PartialViewResult CommentListByBlog(int id)
         {
             var values = cm.GetList(id);
