@@ -2,7 +2,7 @@
 
 namespace MottoUI.DataAccessLayer.Migrations
 {
-    public partial class mig_writer_blog_relation : Migration
+    public partial class mig_add_newsletter_table_writer_blog_relation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,8 +10,22 @@ namespace MottoUI.DataAccessLayer.Migrations
                 name: "WriterID",
                 table: "Blogs",
                 type: "int",
-                nullable: true,
+                nullable: false,
                 defaultValue: 0);
+
+            migrationBuilder.CreateTable(
+                name: "NewsLetters",
+                columns: table => new
+                {
+                    MailID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Mail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MailStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsLetters", x => x.MailID);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Blogs_WriterID",
@@ -32,6 +46,9 @@ namespace MottoUI.DataAccessLayer.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Blogs_Writers_WriterID",
                 table: "Blogs");
+
+            migrationBuilder.DropTable(
+                name: "NewsLetters");
 
             migrationBuilder.DropIndex(
                 name: "IX_Blogs_WriterID",

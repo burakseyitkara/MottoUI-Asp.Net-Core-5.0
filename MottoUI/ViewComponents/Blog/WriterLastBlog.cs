@@ -10,7 +10,7 @@ namespace MottoUI.ViewComponents.Blog
 
         public IViewComponentResult Invoke()
         {
-            var values = bm.GetBlogListByWriter(1);
+            var values = bm.GetBlogListByWriter(3);
             return View(values);
         }
 

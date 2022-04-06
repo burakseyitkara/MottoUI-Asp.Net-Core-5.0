@@ -10,8 +10,8 @@ using MottoUI.DataAccessLayer.Concrete;
 namespace MottoUI.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220405222117_mig_writer_blog_relation")]
-    partial class mig_writer_blog_relation
+    [Migration("20220406091258_mig_add_newsletter_table_writer_blog_relation")]
+    partial class mig_add_newsletter_table_writer_blog_relation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -172,6 +172,24 @@ namespace MottoUI.DataAccessLayer.Migrations
                     b.HasKey("ContactID");
 
                     b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("MottoUI.EntityLayer.Concrete.NewsLetter", b =>
+                {
+                    b.Property<int>("MailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MailStatus")
+                        .HasColumnType("bit");
+
+                    b.HasKey("MailID");
+
+                    b.ToTable("NewsLetters");
                 });
 
             modelBuilder.Entity("MottoUI.EntityLayer.Concrete.Writer", b =>
