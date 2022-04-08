@@ -17,26 +17,30 @@ namespace MottoUI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(Writer p)
+        public IActionResult Index(Writer p,string PassAgain)
         {
             WriterValidator wv = new WriterValidator();
             ValidationResult results = wv.Validate(p);
 
-            if (results.IsValid)
+            if (results.IsValid && p.WriterPassword == PassAgain )
             {
                 p.WriterStatus = true;
                 p.WriterAbout = "Deneme Test";
                 wm.WriterAdd(p);
                 return RedirectToAction("Index", "Blog");
             }
-            else
+            else if (!results.IsValid)
             {
                 foreach (var item in results.Errors)
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-
                 }
             }
+            else
+            {
+                ModelState.AddModelError("WriterPassword", "Şifreler uyuşmuyor");
+            }
+            
             return View();
 
 

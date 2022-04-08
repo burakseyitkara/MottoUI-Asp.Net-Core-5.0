@@ -36,6 +36,11 @@
                             @*<input type="password" class="form-control" id="password1" name="WriterPassword" placeholder="" required="">*@
                         </div>
                         <div class="form-group col-md-6">
+                            <label for="exampleInputPassword2 mb-2">Şifrenizi tekrar giriniz.</label>
+                            <input type="password" name="PassAgain" class="form-control" placeholder="Şifrenizi tekrardan giriniz."/>
+                            @*<input type="password" class="form-control" id="password1" name="WriterPassword" placeholder="" required="">*@
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="exampleInputPassword2 mb-2">Görsel Dosya Yolu</label>
                             @Html.TextBoxFor(x=> x.WriterImage,new { @class = "form-control",@placeholder = "Resminiz"})
                             @Html.ValidationMessageFor(x=> x.WriterImage,"",new { @class = "text-danger" })
