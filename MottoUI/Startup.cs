@@ -26,7 +26,7 @@ namespace MottoUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            services.AddSession();
             services.AddMvc(config=>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -56,6 +56,7 @@ namespace MottoUI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

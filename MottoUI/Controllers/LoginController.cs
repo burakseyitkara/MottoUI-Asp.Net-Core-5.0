@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MottoUI.DataAccessLayer.Concrete;
+using MottoUI.EntityLayer.Concrete;
+using System.Linq;
+
 
 namespace MottoUI.Controllers
 {
@@ -9,6 +14,25 @@ namespace MottoUI.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult Index(Writer p)
+            
+        {
+            Context c = new Context();
+            var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
+            if (datavalue != null)
+            {
+                HttpContext.Session.SetString("username", p.WriterMail);
+                return RedirectToAction("Index", "Writer");
+                
+            }
+            else
+            {
+                return View();
+
+            }
         }
     }
 }
