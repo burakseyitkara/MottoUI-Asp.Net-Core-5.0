@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MottoUI.DataAccessLayer.EntityFramework
 {
-    internal class EfContactRepository:GenericRepository<Contact>, IContactDal
+    public class EfContactRepository:GenericRepository<Contact>, IContactDal
     {
     }
 }
