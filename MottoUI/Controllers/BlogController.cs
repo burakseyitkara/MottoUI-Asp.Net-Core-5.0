@@ -30,7 +30,7 @@ namespace MottoUI.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var values = bm.GetBlogListByWriter(1);
+            var values = bm.GetListWithCategoryByWriterBm(2);
             return View(values);
         }
 
