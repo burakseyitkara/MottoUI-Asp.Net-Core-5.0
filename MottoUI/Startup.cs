@@ -68,7 +68,8 @@ namespace MottoUI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseSession();
+            app.UseAuthentication(); 
+
             app.UseRouting();
 
             app.UseAuthorization();

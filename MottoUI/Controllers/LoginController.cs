@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MottoUI.DataAccessLayer.Concrete;
 using MottoUI.EntityLayer.Concrete;
+using System.Collections.Generic;
 using System.Linq;
-
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MottoUI.Controllers
 {
@@ -17,22 +20,41 @@ namespace MottoUI.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Index(Writer p)
-            
+        public async Task<IActionResult> Index(Writer p)
         {
             Context c = new Context();
-            var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
+            var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == x.WriterMail && x.WriterPassword == p.WriterPassword);
             if (datavalue != null)
             {
-                HttpContext.Session.SetString("username", p.WriterMail);
+                var claims = new List<Claim>
+                {
+                new Claim(ClaimTypes.Name,p.WriterMail)
+                };
+                var userIdentity = new ClaimsIdentity(claims, "login");
+                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+                await HttpContext.SignInAsync(principal);
                 return RedirectToAction("Index", "Writer");
-                
             }
             else
             {
+                ViewBag.Error = "Kullanıcı adı veya şifre hatalı";
                 return View();
-
             }
         }
     }
 }
+
+
+//Context c = new Context();
+//var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
+//if (datavalue != null)
+//{
+//    HttpContext.Session.SetString("username", p.WriterMail);
+//    return RedirectToAction("Index", "Writer");
+
+//}
+//else
+//{
+//    return View();
+
+//}
