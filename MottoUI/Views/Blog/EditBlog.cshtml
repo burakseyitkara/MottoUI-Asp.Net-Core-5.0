@@ -1,0 +1,36 @@
+﻿@model MottoUI.EntityLayer.Concrete.Blog
+@{
+    ViewData["Title"] = "EditBlog";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>EditBlog</h1>
+
+@using (Html.BeginForm("EditBlog", "Blog", FormMethod.Post))
+{
+
+    @Html.Label("Blog ID")
+    @Html.TextBoxFor(model => model.BlogID, new { @class = "form-control" })
+    <br />
+    @Html.Label("Blog Başlığı")
+    @Html.TextBoxFor(model => model.BlogTitle, new { @class = "form-control" })
+    <br />
+    @Html.Label("Blog Thumbnail URL")
+    @Html.TextBoxFor(model => model.BlogThumbnailImage, new { @class = "form-control" })
+    <br />
+    @Html.Label("Blog Görseli")
+    @Html.TextBoxFor(model => model.BlogImage, new { @class = "form-control" })
+    <br />
+    @Html.Label("Blog Kategori")
+    @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.cv, new {@class="form-control"})
+
+    <br />
+    @Html.Label("Blog İçeriği")
+    @Html.TextAreaFor(model => model.BlogContent,10,3, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success"> Güncelle </button>
+
+}
+
+
+

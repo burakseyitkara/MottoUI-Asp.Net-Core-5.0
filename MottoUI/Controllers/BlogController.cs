@@ -16,6 +16,8 @@ namespace MottoUI.Controllers
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
+        CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+        
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
@@ -37,7 +39,6 @@ namespace MottoUI.Controllers
         [HttpGet]
         public IActionResult BlogAdd()
         {
-            CategoryManager cm = new CategoryManager(new EfCategoryRepository());
             List<SelectListItem> categoryvalues = (from x in cm.GetList()
                                                    select new SelectListItem
                                                    {
@@ -83,6 +84,28 @@ namespace MottoUI.Controllers
 
         }
 
-
+        [HttpGet]
+        public IActionResult EditBlog(int id)
+        {
+            List<SelectListItem> categoryvalues = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryID.ToString()
+                                                   }).ToList();
+            ViewBag.cv = categoryvalues;
+            var blogvalue = bm.TGetById(id);
+            return View(blogvalue);
+        }
+        [HttpPost]
+        public IActionResult EditBlog(Blog p)
+        {
+            var blogvalue = bm.TGetById(p.BlogID);
+            p.WriterID = 2;
+            p.BlogStatus = true;
+            p.BlogCreateDate = DateTime.Parse(blogvalue.BlogCreateDate.ToShortDateString());
+            bm.TUpdate(p); 
+            return RedirectToAction("BlogListByWriter");
+        }
     }
 }
