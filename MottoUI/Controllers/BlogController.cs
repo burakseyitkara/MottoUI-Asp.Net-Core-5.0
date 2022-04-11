@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MottoUI.BusinessLayer.Concrete;
 using MottoUI.DataAccessLayer.EntityFramework;
 
 namespace MottoUI.Controllers
 {
+    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
@@ -19,5 +21,8 @@ namespace MottoUI.Controllers
             var values = bm.GetBlogByID(id);
             return View(values);
         }
+
+        
+         
     }
 }
