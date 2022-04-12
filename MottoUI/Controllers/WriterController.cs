@@ -5,6 +5,9 @@ using MottoUI.BusinessLayer.Concrete;
 using MottoUI.BusinessLayer.ValidationRules;
 using MottoUI.DataAccessLayer.EntityFramework;
 using MottoUI.EntityLayer.Concrete;
+using MottoUI.Models;
+using System;
+using System.IO;
 
 namespace MottoUI.Controllers
 {
@@ -66,6 +69,35 @@ namespace MottoUI.Controllers
                 }
             }
             return View();
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult WriterAdd()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult WriterAdd(AddProfileImage p)
+        {
+            Writer w = new Writer();
+            if (p.WriterImage != null)
+            {
+                var extension = Path.GetExtension(p.WriterImage.FileName);
+                var newimagename = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot//WriterImageFiles/", newimagename);
+                var stream = new FileStream(location, FileMode.Create);
+                p.WriterImage.CopyTo(stream);
+                w.WriterImage = newimagename;
+            }
+            w.WriterMail = p.WriterMail;
+            w.WriterName = p.WriterName;
+            w.WriterPassword = p.WriterPassword;
+            w.WriterStatus = p.WriterStatus;
+            w.WriterAbout = p.WriterAbout;
+            wm.TAdd(w);
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }
