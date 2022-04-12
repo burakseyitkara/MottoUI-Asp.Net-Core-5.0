@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MottoUI.DataAccessLayer.Concrete;
+using System.Linq;
 
 namespace MottoUI.Controllers
 {
@@ -8,7 +10,11 @@ namespace MottoUI.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            Context c = new Context();
+            ViewBag.v1 = c.Blogs.Count().ToString();
+            ViewBag.v2 = c.Blogs.Where(x => x.WriterID == 1).Count().ToString();
+            ViewBag.v3 = c.Categories.Count().ToString();
             return View();
         }
-    }
+    } 
 }
