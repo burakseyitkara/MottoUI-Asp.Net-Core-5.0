@@ -41,12 +41,12 @@ namespace MottoUI.BusinessLayer.Concrete
 
         public Writer TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _writerdal.GetByID(id);
         }
 
         public void TUpdate(Writer t)
         {
-            throw new NotImplementedException();
+            _writerdal.Update(t);
         }
 
        
