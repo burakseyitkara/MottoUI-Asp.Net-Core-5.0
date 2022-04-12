@@ -25,9 +25,26 @@ namespace MottoUI.DataAccessLayer.Concrete
 
             modelBuilder.Entity<Match>()
                 .HasOne(m => m.GuestTeam)
-                .WithMany(t => t.AwayMatches)
+                .WithMany(t => t.AwayMatches) 
                 .HasForeignKey(y => y.GuestTeamID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Message2>()
+                .HasOne(m => m.SenderUser)
+                .WithMany(t => t.WriterSender)
+                .HasForeignKey(y => y.SenderID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Message2>()
+                .HasOne(m => m.ReceiverUser)
+                .WithMany(t => t.WriterReceiver)
+                .HasForeignKey(y => y.ReceiverID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+            //HomeMatches --> WriterSender
+            //AwayMatches --> WriterReceiver
+
+            //HomeTeam --> SenderUser
+            //GuestTeam --> ReceiverUser
         }
         
         
@@ -44,6 +61,7 @@ namespace MottoUI.DataAccessLayer.Concrete
         public DbSet<Message> Messages { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Match> Matches { get; set; }
+        public DbSet<Message2> Message2s { get; set; }
 
     }
 }
