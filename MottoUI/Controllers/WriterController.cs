@@ -3,19 +3,27 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MottoUI.BusinessLayer.Concrete;
 using MottoUI.BusinessLayer.ValidationRules;
+using MottoUI.DataAccessLayer.Concrete;
 using MottoUI.DataAccessLayer.EntityFramework;
 using MottoUI.EntityLayer.Concrete;
 using MottoUI.Models;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace MottoUI.Controllers
 {
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());
+        [Authorize]
         public IActionResult Index()
         {
+            var usermail = User.Identity.Name;
+            ViewBag.v = usermail;
+            Context c = new Context();
+            var writerName = c.Writers.Where(x => x.WriterMail == usermail).Select(x => x.WriterName).FirstOrDefault();
+            ViewBag.v2 = writerName;
             return View();
         }
         public IActionResult WriterProfile()
