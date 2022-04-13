@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MottoUI.BusinessLayer.Concrete;
 using MottoUI.BusinessLayer.ValidationRules;
+using MottoUI.DataAccessLayer.Concrete;
 using MottoUI.DataAccessLayer.EntityFramework;
 using MottoUI.EntityLayer.Concrete;
 using System;
@@ -12,18 +13,18 @@ using System.Linq;
 
 namespace MottoUI.Controllers
 {
-    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+        Context c = new Context();
         
+
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
-        [AllowAnonymous]
         public IActionResult BlogReadAll(int id)
         {
             ViewBag.i = id;
@@ -32,7 +33,9 @@ namespace MottoUI.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var values = bm.GetListWithCategoryByWriterBm(2);
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(x => x.WriterID).FirstOrDefault();
+            var values = bm.GetListWithCategoryByWriterBm(writerID);
             return View(values);
         }
 
@@ -51,14 +54,17 @@ namespace MottoUI.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(x => x.WriterID).FirstOrDefault();
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(p);
 
             if (results.IsValid)
             {
+
                 p.BlogStatus = true;
                 p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                p.WriterID = 1;
+                p.WriterID = writerID;
                 bm.TAdd(p);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -100,8 +106,10 @@ namespace MottoUI.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(x => x.WriterID).FirstOrDefault();
             var blogvalue = bm.TGetById(p.BlogID);
-            p.WriterID = 2;
+            p.WriterID = writerID;
             p.BlogStatus = true;
             p.BlogCreateDate = DateTime.Parse(blogvalue.BlogCreateDate.ToShortDateString());
             bm.TUpdate(p); 

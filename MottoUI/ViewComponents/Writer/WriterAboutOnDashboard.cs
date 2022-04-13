@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MottoUI.BusinessLayer.Concrete;
+using MottoUI.DataAccessLayer.Concrete;
 using MottoUI.DataAccessLayer.EntityFramework;
+using System.Linq;
 
 namespace MottoUI.ViewComponents.Writer
 {
@@ -10,7 +12,10 @@ namespace MottoUI.ViewComponents.Writer
 
         public IViewComponentResult Invoke()
         {
-            var values = wm.GetWriterById(1);
+            var usermail = User.Identity.Name;
+            Context c = new Context();
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(x => x.WriterID).FirstOrDefault();
+            var values = wm.GetWriterById(writerID);
             return View(values);
         }
     }
