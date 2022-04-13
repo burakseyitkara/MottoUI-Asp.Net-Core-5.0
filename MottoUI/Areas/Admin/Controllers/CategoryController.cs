@@ -45,9 +45,13 @@ namespace MottoUI.Areas.Admin.Controllers
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
-           
-
             return View();
+        }
+        public IActionResult CategoryDelete(int id)
+        {
+            var value = cm.TGetById(id);
+            cm.TDelete(value);
+            return RedirectToAction("Index", "Category");
         }
     }
 }

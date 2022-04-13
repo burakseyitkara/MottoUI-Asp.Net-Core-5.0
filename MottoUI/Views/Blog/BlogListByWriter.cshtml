@@ -4,6 +4,7 @@
     ViewData["Title"] = "BlogListByWriter";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <h1>BlogListByWriter</h1>
 
@@ -46,3 +47,24 @@
 
 </table>
 <a href="/Blog/BlogAdd/" class="btn btn-primary">Yeni Blog Oluştur</a>
+
+<script>
+    function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href'); 
+        swal({
+            title: "Blogu silmek istediğinize emin misiniz?",
+            text: "Bu işlemi geri alamazsınız!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = urlToRedirect;
+            } else {
+                swal("Blog silinmedi!");
+            }
+        });
+    }
+</script>

@@ -6,34 +6,62 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 
 <h1>Kategori Listesi</h1>
-<br/>
+<br />
 <table class="table table-bordered">
 
-    
-<tr>
-    <th>#</th>
-    <th>Kategori Adı</th>
-    <th>Pasif Yap</th>
-    <th>Aktif Yap</th>
-    <th>Düzenle</th>
-</tr>
-@foreach (var item in Model)
-{
+
     <tr>
-        <th>@item.CategoryID</th>
-        <td>@item.CategoryName</td>
-        <td><a href="#" class="btn btn-danger">Pasif Yap</a></td>
-        <td><a href="#" class="btn btn-warning">Aktif Yap</a></td>
-        <td><a href="#" class="btn btn-success">Düzenle</a></td>
-        
+        <th>#</th>
+        <th>Kategori Adı</th>
+        <th>Pasif Yap</th>
+        <th>Aktif Yap</th>
+        <th>Düzenle</th>
     </tr>
-    
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.CategoryID</th>
+            <td>@item.CategoryName</td>
+            <td>
+                <a id="DeleteBtn"onclick="return confirmation(event)" href="/Admin/Category/CategoryDelete/@item.CategoryID" 
+                class="btn btn-danger">Pasif Yap</a>
+                @*<a href="/Admin/Category/CategoryDelete/@item.CategoryID" id="DeleteBtn"
+                    onclick="return confirm('Silmek istediginize emin misiniz?')" class="btn btn-danger">Pasif Yap</a>  *@
+            </td>
+            <td><a href="#" class="btn btn-warning">Aktif Yap</a></td>
+            <td><a href="#" class="btn btn-success">Düzenle</a></td>
+
+        </tr>
+
+    }
 </table>
 <a href="/Admin/Category/AddCategory/" class="btn btn-primary">Yeni Kategori Ekle</a>
-<br/>
-<br/>
+<br />
+<br />
 
 @Html.PagedListPager((IPagedList)Model,page => Url.Action("Index", new { page }))
+
+<script>
+    function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href'); 
+        swal({
+            title: "Kategoriyi silmek istediğinize emin misiniz?",
+            text: "Bu işlemi geri alamazsınız!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = urlToRedirect;
+            } else {
+                swal("Kategori silinmedi!");
+            }
+        });
+    }
+</script>
