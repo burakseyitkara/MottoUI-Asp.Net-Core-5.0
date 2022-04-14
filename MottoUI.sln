@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MottoUI.DataAccessLayer", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MottoUI.EntityLayer", "MottoUI.EntityLayer\MottoUI.EntityLayer.csproj", "{9BD3A3D3-2C87-42E8-BDB5-B9567937C6B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottoUI.Api", "MottoUI.Api\MottoUI.Api.csproj", "{830520E7-FEF6-48B4-B2A8-3D1E85A1787F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9BD3A3D3-2C87-42E8-BDB5-B9567937C6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BD3A3D3-2C87-42E8-BDB5-B9567937C6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BD3A3D3-2C87-42E8-BDB5-B9567937C6B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{830520E7-FEF6-48B4-B2A8-3D1E85A1787F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{830520E7-FEF6-48B4-B2A8-3D1E85A1787F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{830520E7-FEF6-48B4-B2A8-3D1E85A1787F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{830520E7-FEF6-48B4-B2A8-3D1E85A1787F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
