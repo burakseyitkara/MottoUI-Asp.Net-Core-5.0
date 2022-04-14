@@ -24,7 +24,8 @@ namespace MottoUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UserSignUpViewModel p)
         {
-            if(ModelState.IsValid)
+           
+            if (ModelState.IsValid)
             {
                 AppUser user = new AppUser()
                 {
@@ -33,7 +34,8 @@ namespace MottoUI.Controllers
                     NameSurname = p.NameSurname
                 };
                 var result = await _userManager.CreateAsync(user, p.Password);
-                if(result.Succeeded)
+                
+                if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Login");
                 }

@@ -4,6 +4,7 @@ namespace MottoUI.Models
 {
     public class UserSignUpViewModel
     {
+
         [Display(Name = "Ad Soyad")]
         [Required(ErrorMessage="Lütfen ad soyad giriniz.")]
         public string NameSurname { get; set; }
