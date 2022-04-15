@@ -86,6 +86,7 @@ namespace MottoUI.Controllers
             values.NameSurname = model.namesurname;
             values.Email = model.mail;
             values.ImageUrl = model.imageurl;
+            values.PasswordHash= _userManager.PasswordHasher.HashPassword(values, model.password);
             var result = await _userManager.UpdateAsync(values);
             return RedirectToAction("Index", "Dashboard");
             //WriterValidator wl = new WriterValidator();
