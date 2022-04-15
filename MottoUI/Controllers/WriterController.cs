@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MottoUI.BusinessLayer.Concrete;
 using MottoUI.BusinessLayer.ValidationRules;
@@ -10,12 +11,21 @@ using MottoUI.Models;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MottoUI.Controllers
 {
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());
+
+        private readonly UserManager<AppUser> _userManager;
+
+        public WriterController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
@@ -30,7 +40,7 @@ namespace MottoUI.Controllers
         {
             return View();
         }
-          
+
         public IActionResult WriterMail()
         {
             return View();
@@ -45,40 +55,54 @@ namespace MottoUI.Controllers
         {
             return PartialView();
         }
-        
+
         [AllowAnonymous]
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
         }
         [HttpGet]
-        public IActionResult WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile()
         {
-            Context c = new Context();
-            var username = User.Identity.Name;
-            var usermail = c.Users.Where(x => x.UserName == username).Select(x => x.Email).FirstOrDefault();
-            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(x => x.WriterID).FirstOrDefault();
-            var writervalues = wm.TGetById(writerID);
-            return View(writervalues);
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateViewModel model = new UserUpdateViewModel();
+            model.mail = values.Email;
+            model.namesurname = values.NameSurname;
+            model.imageurl = values.ImageUrl;
+            model.username = values.UserName;
+            return View(model);
+
+            //Context c = new Context();
+            //var username = User.Identity.Name;
+            //var usermail = c.Users.Where(x => x.UserName == username).Select(x => x.Email).FirstOrDefault();
+            //UserManager userManager = new UserManager(new EfUserRepository());
+            //var id = c.Users.Where(x => x.Email == usermail).Select(x => x.Id).FirstOrDefault();
+            //var values = userManager.TGetById(id);
         }
         [HttpPost]
-        public IActionResult WriterEditProfile(Writer p)
+        public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel model)
         {
-            WriterValidator wl = new WriterValidator();
-            ValidationResult results = wl.Validate(p);
-            if (results.IsValid)
-            {
-                wm.TUpdate(p);
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.NameSurname = model.namesurname;
+            values.Email = model.mail;
+            values.ImageUrl = model.imageurl;
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "Dashboard");
+            //WriterValidator wl = new WriterValidator();
+            //ValidationResult results = wl.Validate(p);
+            //if (results.IsValid)
+            //{
+            //    userManager.TUpdate(p);
+            //    return RedirectToAction("Index", "Dashboard");
+            //}
+            //else
+            //{
+            //    foreach (var item in results.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            //return View();
         }
         [AllowAnonymous]
         [HttpGet]
