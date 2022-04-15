@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MottoUI.BusinessLayer.Concrete;
 using MottoUI.DataAccessLayer.EntityFramework;
 using MottoUI.EntityLayer.Concrete;
@@ -6,6 +7,7 @@ using System;
 
 namespace MottoUI.Controllers
 {
+    [AllowAnonymous]
     public class ContactController : Controller
     {
         ContactManager cm = new ContactManager(new EfContactRepository());

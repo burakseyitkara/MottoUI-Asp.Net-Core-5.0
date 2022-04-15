@@ -54,8 +54,9 @@ namespace MottoUI.Controllers
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
-            var usermail = User.Identity.Name;
             Context c = new Context();
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(x => x.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(x => x.WriterID).FirstOrDefault();
             var writervalues = wm.TGetById(writerID);
             return View(writervalues);
