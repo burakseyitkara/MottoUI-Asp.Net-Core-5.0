@@ -1,11 +1,11 @@
 ﻿@using MottoUI.EntityLayer.Concrete
-@model List<Comment>
+@model List<AppRole>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<!DOCTYPE html>
+
 <html>
     <body>
         <div class="wrapper wrapper-content animated fadeInRight">
@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Yorumlar</h5>
+                            <h5>Roller</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -40,11 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Kullanıcı</th>
                                         <th>Başlık</th>
-                                        <th>Blog</th>
-                                        <th>Puan</th>
-                                        <th>Tarih</th>
                                         <th>Sil</th>
                                         <th>Düzenle</th>
                                     </tr>
@@ -54,40 +50,9 @@
                                     {
 
                                         <tr>
-                                            <th>@item.CommentID</th>
-                                            <td>@item.CommentUserName</td>
-                                            <td>@item.CommentTitle</td>
-                                            <td>@item.Blog.BlogTitle</td>
+                                            <th>@item.Id</th>
+                                            <td>@item.Name</td>
 
-                                            <td class="text-navy">
-                                                @if (@item.BlogScore <= 3)
-                                                {
-                                                    <i class="fa fa-level-down" style="color:red;"></i> @item.BlogScore
-                                                }
-                                                @if (@item.BlogScore <= 6 && @item.BlogScore > 3)
-                                                {
-                                                    <i class="fa fa-level-up" style="color:#F8AC59"></i> @item.BlogScore
-                                                }
-
-
-                                                @if (@item.BlogScore <= 8 && @item.BlogScore > 6)
-                                                {
-                                                    <i class="fa fa-level-up" style="color:blue;"></i> @item.BlogScore
-
-                                                }
-                                                @if (@item.BlogScore <= 10 && @item.BlogScore > 8)
-                                                {
-                                                    <i class="fa fa-level-up" style="color:green;"></i> @item.BlogScore
-                                                }
-
-
-                                            </td>
-
-
-                                            @*<i class="fa fa-level-up"></i> @item.BlogScore*@
-
-
-                                            <td>@(((DateTime)item.CommentDate).ToString("dd-MMM-yyyy"))</td>
                                             <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
                                             <td><a href="#" class="btn btn-outline-success">Güncelle</a></td>
                                         </tr>
@@ -95,6 +60,7 @@
 
                                 </tbody>
                             </table>
+                        <a href="/Admin/AdminRole/AddRole/" class="btn btn-outline-primary">Yeni Rol Ekle</a>
                         </div>
                     </div>
                 </div>
@@ -102,3 +68,5 @@
         </div>
     </body>
 </html>
+
+
