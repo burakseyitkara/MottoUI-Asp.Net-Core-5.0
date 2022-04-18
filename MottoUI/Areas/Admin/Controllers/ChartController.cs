@@ -14,8 +14,9 @@ namespace MottoUI.Areas.Admin.Controllers
 
         public IActionResult CategoryChart()
         {
+            var x = 600;
             List<CategoryClass> list = new List<CategoryClass>();
-            list.Add(new CategoryClass { categoryname = "Teknoloji", categorycount = 70 });
+            list.Add(new CategoryClass { categoryname = "Teknoloji", categorycount = x });
             list.Add(new CategoryClass { categoryname = "Yazılım", categorycount = 80 });
             list.Add(new CategoryClass { categoryname = "Spor", categorycount = 90 });
             return Json(new { jsonlist = list });

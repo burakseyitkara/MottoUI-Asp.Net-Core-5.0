@@ -13,12 +13,12 @@
             @foreach (var item in Model)
             {
 
-                <div class="col-md-3">
+                <div class="col-lg-3">
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
                             <div>
-                                <img src="@item.BlogImage" height="225" width="240" />
+                                <img src="@item.BlogImage" height="250" width="380" />
                             </div>
                             <div class="product-desc">
                                 <span class="product-price">
@@ -29,7 +29,7 @@
 
 
 
-                                <div class="small m-t-xs">
+                                <div class="m-t-xs">
                                     @item.BlogContent.Substring(0,item.BlogContent.Substring(0,100).LastIndexOf(" "))...
                                 </div>
                                 <div class="m-t text-righ">
