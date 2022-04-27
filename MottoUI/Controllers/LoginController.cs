@@ -81,7 +81,6 @@ namespace MottoUI.Controllers
     }
 }
 
-
 //Context c = new Context();
 //var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
 //if (datavalue != null)
